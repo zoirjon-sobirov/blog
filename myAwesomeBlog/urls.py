@@ -21,6 +21,8 @@ import events.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', events.views.home,name='home'),
-    path('posts/',include('blog.urls')),              # Stranisa bloga
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)     # Admin lesson
+    path('', include("Home.urls")),
+
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
+]
